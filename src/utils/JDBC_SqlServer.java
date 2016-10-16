@@ -99,7 +99,7 @@ public class JDBC_SqlServer {
 		}
 	}
 
-	public void log(String l) {
+	public static void log(String l) {
 		System.out.println("Log: " + l);
 	}
 }

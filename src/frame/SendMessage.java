@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -35,29 +37,30 @@ public class SendMessage extends JFrame {
 	private ServerSocket serverS;
     private int REC_PORT = 8091;
     private JTextField Input_message;
+    private JTextArea Receive_message;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SendMessage frame = new SendMessage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					SendMessage frame = new SendMessage();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public SendMessage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 508, 300);
+		setBounds(100, 100, 508, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -82,7 +85,11 @@ public class SendMessage extends JFrame {
 		Button_send.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SocketCommu.SendMessage(Input_ip.getText(), Input_message.getText());
+				//send message by tcp socket
+//				SocketCommu.SendMessage(Input_ip.getText(), Input_message.getText());
+
+				//send message by udp socket
+				SocketCommu.SendMessageByUDP(Input_ip.getText(), Input_message.getText());
 			}
 		});
 		Panel_ip.add(Button_send);
@@ -95,6 +102,11 @@ public class SendMessage extends JFrame {
 		
 		Input_message = new JTextField();
 		Panel_message.add(Input_message);
+		Receive_message = new JTextArea(8, 40);
+		Receive_message.setLineWrap(true);
+		Receive_message.setWrapStyleWord(true);
+		Panel_message.add(new JScrollPane(Receive_message));
+		
 		Input_message.setColumns(40);
 		setVisible(true);
 		
@@ -118,6 +130,29 @@ public class SendMessage extends JFrame {
 			e.printStackTrace();
 		}
 		setIconImage(icon);
+		
+		ReceiveMessage receive = new ReceiveMessage();
+		receive.setDaemon(true);
+		receive.start();
+		//listening message
+		Thread listening = new Thread(){
+			@Override
+			public void run() {
+				while(true) {
+					if(!receive.getIsNew()) {
+						Receive_message.append(receive.getMessage().trim() + "\n");
+					}
+					try {
+						currentThread().sleep(1000);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		};
+		listening.setDaemon(true);
+		listening.start();
 	}
 
 }
