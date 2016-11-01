@@ -42,7 +42,8 @@ public class Main {
 	        } catch (Exception e) {
 	          System.out.println("Substance Graphite failed to initialize");
 	        }
-	        SendMessage Frame_send_message = new SendMessage();
+//	        SendMessage Frame_send_message = new SendMessage();
+	        FrameMain main = new FrameMain();
 	      }
 	    });
 	    

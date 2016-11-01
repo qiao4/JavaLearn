@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="E:/spring/target/dependencies/x86-3.3.0-v3346.jar"/>
 	<classpathentry kind="lib" path="E:/spring/target/dependencies/xmlParserAPIs-2.6.2.jar"/>
 	<classpathentry kind="lib" path="E:/spring/target/dependencies/xpp3-1.1.4c.jar"/>
+	<classpathentry kind="lib" path="E:/spring/commons-io-2.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

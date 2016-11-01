@@ -1,11 +1,21 @@
 package utils;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import org.apache.commons.io.FileUtils;
+
+import android.R.bool;
 
 public class SocketCommu {
 
@@ -42,5 +52,43 @@ public class SocketCommu {
 			e.printStackTrace();
             return false;
 		}
+	}
+	
+	public static boolean DownloadPicture(String a_url) throws Exception {
+		String filename = a_url.substring(a_url.lastIndexOf("/") + 1, a_url.length());
+		System.out.println("tag: " + filename + "|" + a_url);
+		URL url = new URL(a_url);
+		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+		connection.setRequestMethod("GET"); 
+		connection.setReadTimeout(5 * 1000);
+//		connection.connect();
+		InputStream  is = connection.getInputStream();
+		FileOutputStream os = new FileOutputStream(filename);
+		while(is.available() > 0) {
+			os.write(is.read());
+		}
+		is.close();
+		os.close();
+		return true;
+	}
+	
+	public static boolean DownloadPictureByFileUtils(String a_url) throws Exception {
+		String filename = a_url.substring(a_url.lastIndexOf("/") + 1, a_url.length());
+		System.out.println("tag: " + filename + "|" + a_url);
+		URL url = new URL(a_url);
+		FileUtils.copyURLToFile(url, new File(filename));
+		return true;
+	}
+	
+	public static String GetThreeString(int num) {
+		StringBuilder numString = new StringBuilder(String.valueOf(num));
+		if(numString.length() == 3) {
+			return numString.toString();
+		} else if(numString.length() == 2) {
+			return "0" + numString.toString();
+		} else if(numString.length() == 1) {
+			return "00" + numString.toString();
+		}
+		return "";
 	}
 }
