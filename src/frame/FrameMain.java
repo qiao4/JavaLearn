@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -45,7 +46,7 @@ public class FrameMain extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnSendMessage = new JButton("Send Message");
 		btnSendMessage.addMouseListener(new MouseAdapter() {
 			@Override
@@ -53,37 +54,54 @@ public class FrameMain extends JFrame {
 				SendMessage Frame_send_message = new SendMessage();
 			}
 		});
-	
+
 		btnSendMessage.setBounds(23, 10, 105, 23);
 		contentPane.add(btnSendMessage);
-		
+
 		JButton btnDownload = new JButton("Download Pic");
 		btnDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//download picture
+				// download picture
 				String baseUrl = "https://web-ace.jp/img/youngaceup/contents/1000010/comic/";
-				String picPre = "YAUP_emiyasan_";
-				String picApp = "comp.jpg";
-				for(int i = 1; i < 10; i++) {
-//				int i = 1;
-					for(int j = 1; j <= 15; j++) {
-						try {
-							String url = baseUrl + picPre + SocketCommu.GetThreeString(i) 
-									+ "_" + SocketCommu.GetThreeString(j) + picApp;
-//							SocketCommu.DownloadPicture(url);
-							SocketCommu.DownloadPictureByFileUtils(url);
-						} catch(Exception ex) {
-							ex.printStackTrace();
-						}
+				String picPre = "emiyasan_";
+				String picApp = ".jpg";
+				for (int i = 1; i < 2; i++) {
+					for (int j = 1; j <= 15; j++) {
+						String url = baseUrl + picPre
+								+ SocketCommu.GetThreeString(i) + "_"
+								+ SocketCommu.GetThreeString(j) + picApp;
+						new Thread(new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									SocketCommu.DownloadPicture(url);
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								}
+							}
+						}).start();
+						// SocketCommu.DownloadPictureByFileUtils(url);
 					}
 				}
+				JOptionPane.showConfirmDialog(null, "download has finished!");
 			}
 		});
 
-		
 		btnDownload.setBounds(23, 43, 105, 23);
 		contentPane.add(btnDownload);
+		
+		JButton btnMethodTest = new JButton("Class Method");
+		btnMethodTest.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ClassMethod test = new ClassMethod();
+				test.setVisible(true);
+			}
+		});
+		btnMethodTest.setBounds(23, 76, 105, 23);
+		contentPane.add(btnMethodTest);
 		setVisible(true);
 	}
 }

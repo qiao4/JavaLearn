@@ -47,9 +47,6 @@ public class Main {
 	      }
 	    });
 	    
-//		SendMessage Frame_send_message = new SendMessage();
-		
-		//test git
 	}
 	
 }

@@ -61,11 +61,13 @@ public class SocketCommu {
 		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 		connection.setRequestMethod("GET"); 
 		connection.setReadTimeout(5 * 1000);
-//		connection.connect();
 		InputStream  is = connection.getInputStream();
+		int picSize = connection.getContentLength();
+		int i = 0;
 		FileOutputStream os = new FileOutputStream(filename);
-		while(is.available() > 0) {
+		while( i < picSize) {
 			os.write(is.read());
+			i++;
 		}
 		is.close();
 		os.close();
