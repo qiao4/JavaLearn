@@ -11,7 +11,7 @@ public class ClassMethodTest {
 		
 	}
 	
-	public void log(String msg) {
+	public static void log(String msg) {
 		System.out.println("TAG--" + msg + "--");
 	}
 }

@@ -6,13 +6,29 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JTextField;
+
+import utils.ClassMethodTest;
+
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.TextEvent;
+import java.awt.event.TextListener;
 
 public class ClassMethod extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField inputString;
 
 	/**
 	 * Launch the application.
@@ -35,7 +51,7 @@ public class ClassMethod extends JFrame {
 	 */
 	public ClassMethod() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 520, 391);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,5 +67,69 @@ public class ClassMethod extends JFrame {
 		});
 		btnStringFormat.setBounds(10, 10, 132, 23);
 		contentPane.add(btnStringFormat);
+		
+		inputString = new JTextField();
+		inputString.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClassMethodTest.log("action performed");
+				inputString.setText(inputString.getText().replace(" ", ""));
+			}
+		});
+
+//		inputString.addInputMethodListener(new InputMethodListener() {
+//			public void caretPositionChanged(InputMethodEvent event) {
+//			}
+//			public void inputMethodTextChanged(InputMethodEvent event) {
+//				inputString.setText(inputString.getText().replace(" ", ""));
+//				ClassMethodTest.log("changed");
+//			}
+//		});
+		Document doc = inputString.getDocument();
+		doc.addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				ClassMethodTest.log("removed");
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				Document d = e.getDocument();
+				try {
+					ClassMethodTest.log("inserted:" + d.getText(0, d.getLength()));
+					ClassMethodTest.log("inserted:" + d.getText(0, d.getLength()).replace(" ", ""));
+					inputString.setText(d.getText(0, d.getLength()).replace(" ", ""));
+				} catch (Exception ex) {
+					
+				}
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				Document d = e.getDocument();
+				ClassMethodTest.log("changed");
+				try {
+					inputString.setText(d.getText(0, d.getLength()));
+				} catch (Exception ex) {
+					
+				}
+			}
+		});
+		inputString.setBounds(10, 43, 353, 236);
+		contentPane.add(inputString);
+		inputString.setColumns(10);
+		
+		JButton btnRemoveSpace = new JButton("Remove Space");
+		btnRemoveSpace.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				inputString.setText(inputString.getText().replace(" ", ""));
+			}
+		});
+		
+		btnRemoveSpace.setBounds(173, 10, 122, 23);
+		contentPane.add(btnRemoveSpace);
 	}
 }
