@@ -131,5 +131,23 @@ public class ClassMethod extends JFrame {
 		
 		btnRemoveSpace.setBounds(173, 10, 122, 23);
 		contentPane.add(btnRemoveSpace);
+		
+		JButton btnLambdaTest = new JButton("Lambda Test");
+		btnLambdaTest.addActionListener((e) -> {
+			
+		});
+		
+		btnLambdaTest.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ClassMethodTest.lambdaTest();
+				Runnable r = () -> {
+					System.out.println("lambda test");
+				};
+				r.run();
+			}
+		});
+		btnLambdaTest.setBounds(316, 10, 99, 23);
+		contentPane.add(btnLambdaTest);
 	}
 }

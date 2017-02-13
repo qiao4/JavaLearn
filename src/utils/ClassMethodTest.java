@@ -1,5 +1,11 @@
 package utils;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
+import android.R.xml;
+
 public class ClassMethodTest {
 
 	//String.format
@@ -13,5 +19,10 @@ public class ClassMethodTest {
 	
 	public static void log(String msg) {
 		System.out.println("TAG--" + msg + "--");
+	}
+	
+	public static void lambdaTest() {
+		List<Integer> l = Arrays.asList(1, 2, 3, 4, 5, 6);
+		l.stream().map(x -> x *x).forEach(System.out::println);
 	}
 }
