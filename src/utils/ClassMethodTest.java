@@ -1,10 +1,7 @@
 package utils;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
-
-import android.R.xml;
 
 public class ClassMethodTest {
 

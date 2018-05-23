@@ -9,13 +9,9 @@ import java.net.DatagramSocket;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.URL;
-import java.net.URLConnection;
 
 import org.apache.commons.io.FileUtils;
-
-import android.R.bool;
 
 public class SocketCommu {
 

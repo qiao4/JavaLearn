@@ -2,23 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="E:/spring/sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/android-2.1_r1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/ant-1.6.5.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/asm-all-2.2.3.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/commons-codec-1.3.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/httpclient-4.0.1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/httpcore-4.0.1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/laf-plugin-1.1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/laf-widget-5.0.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/lite-2.2.3.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/opengl-api-gl1.1-android-2.1_r1.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/substance-6.0.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/trident-1.2.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/x86-3.3.0-v3346.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/xmlParserAPIs-2.6.2.jar"/>
-	<classpathentry kind="lib" path="E:/spring/target/dependencies/xpp3-1.1.4c.jar"/>
-	<classpathentry kind="lib" path="E:/spring/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/laf-plugin.jar"/>
+	<classpathentry kind="lib" path="lib/laf-widget-7.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/substance-6.0.jar"/>
+	<classpathentry kind="lib" path="lib/trident-7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
